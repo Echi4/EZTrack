@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import './transaction.dart';
 
 void main() => runApp(App());
@@ -23,17 +24,17 @@ class HomePage extends StatelessWidget {
     Transaction(
       title: 'Mkate',
       amount: 2000,
-      date: DateTime.now(),
+      date: DateFormat('EEE hh:mma').format(DateTime.now()),
     ),
     Transaction(
       title: 'Soda',
       amount: 1000,
-      date: DateTime.now(),
+      date: DateFormat('EEE hh:mma').format(DateTime.now()),
     ),
     Transaction(
       title: 'Zege',
       amount: 2500,
-      date: DateTime.now(),
+      date: DateFormat('EEE hh:mma').format(DateTime.now()),
     )
   ];
 
@@ -58,19 +59,41 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            width: 200.0,
-            child: const Card(
-              color: Colors.grey,
-              elevation: 5.0,
-              child: Text(
-                'edwin',
+          Column(
+              children: transactions.map((transaction) {
+            return Card(
+              child: Row(
+                children: [
+                  Container(
+                    child: Text(
+                      transaction.amount.toString(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 17.0),
+                    ),
+                    padding: EdgeInsets.all(10.0),
+                    margin:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 3.0, color: Colors.black)),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        transaction.title,
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        transaction.date.toString(),
+                        style: TextStyle(color: Colors.grey),
+                      )
+                    ],
+                  )
+                ],
               ),
-            ),
-          ),
+            );
+          }).toList())
         ],
       ),
     );
