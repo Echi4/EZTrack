@@ -23,17 +23,17 @@ class HomePage extends StatelessWidget {
   final List<Transaction> transactions = [
     Transaction(
       title: 'Mkate',
-      amount: 2000,
+      amount: 0.7,
       date: DateFormat('EEE hh:mma').format(DateTime.now()),
     ),
     Transaction(
       title: 'Soda',
-      amount: 1000,
+      amount: 0.43,
       date: DateFormat('EEE hh:mma').format(DateTime.now()),
     ),
     Transaction(
       title: 'Zege',
-      amount: 2500,
+      amount: 1,
       date: DateFormat('EEE hh:mma').format(DateTime.now()),
     )
   ];
@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      transaction.amount.toString(),
+                      '\$${transaction.amount}',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 17.0),
                     ),
