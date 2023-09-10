@@ -41,21 +41,46 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Hi there!! Welcome Back'),
       ),
       body: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            width: 200.0,
-            child: const Card(
-              color: Colors.grey,
-              elevation: 5.0,
+          Card(
+            color: Colors.grey,
+            elevation: 5.0,
+            child: Container(
+              width: double.infinity,
               child: Text(
-                'edwin',
+                'CHART',
+              ),
+            ),
+          ),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      label: Text('Title'),
+                    ),
+                    onChanged: (text) {},
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      label: Text('Amount'),
+                    ),
+                    keyboardType: TextInputType.number,
+                    onChanged: (text) {},
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text('Add Transaction'),
+                  )
+                ],
               ),
             ),
           ),
