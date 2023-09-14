@@ -28,24 +28,25 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Hi there!! Welcome Back'),
       ),
-      body: const Column(
-        children: [
-          Card(
-            color: Colors.grey,
-            elevation: 5.0,
-            child: SizedBox(
-              width: double.infinity,
-              child: Text(
-                'CHART',
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Card(
+              color: Colors.grey,
+              elevation: 5.0,
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'CHART',
+                ),
               ),
             ),
-          ),
-          UpdatedTransactionList(),
-        ],
+            UpdatedTransactionList(),
+          ],
+        ),
       ),
     );
   }

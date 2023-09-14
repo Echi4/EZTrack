@@ -9,41 +9,45 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: transactions.map((transaction) {
-        return Card(
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10.0),
-                margin: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 15.0),
-                decoration: BoxDecoration(
-                    border: Border.all(width: 3.0, color: Colors.black)),
-                child: Text(
-                  '\$${transaction.amount}',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 17.0),
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    transaction.title,
+    return SizedBox(
+      height: 350,
+      child: ListView.builder(
+        itemCount: transactions.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10.0),
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 15.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 3.0, color: Colors.black)),
+                  child: Text(
+                    '\$${transactions[index].amount}',
                     style: const TextStyle(
-                        fontSize: 20.0, fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.bold, fontSize: 17.0),
                   ),
-                  Text(
-                    transaction.date.toString(),
-                    style: const TextStyle(color: Colors.grey),
-                  )
-                ],
-              )
-            ],
-          ),
-        );
-      }).toList(),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      transactions[index].title,
+                      style: const TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      transactions[index].date.toString(),
+                      style: const TextStyle(color: Colors.grey),
+                    )
+                  ],
+                )
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
