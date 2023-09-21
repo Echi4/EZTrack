@@ -9,45 +9,43 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 350,
-      child: ListView.builder(
-        itemCount: transactions.length,
-        itemBuilder: (context, index) {
-          return Card(
+    return Column(
+        children: transactions.map(
+      (transaction) {
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(10.0),
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 15.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 20.0),
                   decoration: BoxDecoration(
-                      border: Border.all(width: 3.0, color: Colors.black)),
+                    border: Border.all(color: Colors.black, width: 5.0),
+                  ),
                   child: Text(
-                    '\$${transactions[index].amount}',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 17.0),
+                    "\$ ${transaction.amount}",
+                    style: const TextStyle(fontSize: 20.0),
                   ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      transactions[index].title,
+                      transaction.title,
                       style: const TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.w500),
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      transactions[index].date.toString(),
-                      style: const TextStyle(color: Colors.grey),
+                      transaction.date,
+                      style: const TextStyle(fontSize: 15.0),
                     )
                   ],
                 )
               ],
             ),
-          );
-        },
-      ),
-    );
+          ),
+        );
+      },
+    ).toList());
   }
 }

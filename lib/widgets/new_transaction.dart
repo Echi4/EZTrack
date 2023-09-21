@@ -1,41 +1,38 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
-  final amountInputController = TextEditingController();
-  final titleInputController = TextEditingController();
+class NewTransactionInput extends StatelessWidget {
   final Function addTransaction;
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
 
-  NewTransaction(this.addTransaction, {super.key});
+  NewTransactionInput(this.addTransaction, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
-              controller: titleInputController,
-              decoration: const InputDecoration(
-                label: Text('Title'),
-              ),
+              decoration: const InputDecoration(labelText: "Title"),
+              keyboardType: TextInputType.text,
+              controller: titleController,
             ),
             TextField(
-              controller: amountInputController,
-              decoration: const InputDecoration(
-                label: Text('Amount'),
-              ),
+              decoration: const InputDecoration(labelText: "Amount"),
               keyboardType: TextInputType.number,
+              controller: amountController,
             ),
             TextButton(
               onPressed: () {
                 addTransaction(
-                  titleInputController.text,
-                  double.parse(amountInputController.text),
+                  titleController.text,
+                  double.parse(amountController.text),
                 );
               },
-              child: const Text('Add Transaction'),
+              child: const Text("Add Transaction"),
             )
           ],
         ),

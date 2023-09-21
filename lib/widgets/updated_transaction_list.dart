@@ -1,9 +1,9 @@
+import 'package:expenses_tracker/widgets/new_transaction.dart';
+import 'package:expenses_tracker/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
-import './new_transaction.dart';
-import './transaction_list.dart';
 
 class UpdatedTransactionList extends StatefulWidget {
   const UpdatedTransactionList({super.key});
@@ -15,12 +15,15 @@ class UpdatedTransactionList extends StatefulWidget {
 class _UpdatedTransactionListState extends State<UpdatedTransactionList> {
   final List<Transaction> _transactions = [];
 
-  void _addNewTransaction(String transactionTitle, double transactionAmount) {
+  void _addTransaction(String title, double amount) {
     final newTransaction = Transaction(
-      title: transactionTitle,
-      amount: transactionAmount,
-      date: DateFormat('EEE hh:mma').format(DateTime.now()),
+      title: title,
+      amount: amount,
+      date: DateFormat('ddMMM hh:mm').format(
+        DateTime.now(),
+      ),
     );
+
     setState(() {
       _transactions.add(newTransaction);
     });
@@ -30,7 +33,7 @@ class _UpdatedTransactionListState extends State<UpdatedTransactionList> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        NewTransaction(_addNewTransaction),
+        NewTransactionInput(_addTransaction),
         TransactionList(_transactions),
       ],
     );
