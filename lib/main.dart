@@ -30,22 +30,24 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Hi there!! Welcome Back'),
       ),
-      body: const Column(
-        children: [
-          Card(
-            color: Colors.grey,
-            elevation: 5.0,
-            child: SizedBox(
-              width: double.infinity,
-              height: 50.0,
-              child: Text(
-                'CHART',
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            Card(
+              color: Colors.grey,
+              elevation: 5.0,
+              child: SizedBox(
+                width: double.infinity,
+                height: 50.0,
+                child: Text(
+                  'CHART',
+                ),
               ),
             ),
-          ),
-          //Add other widgets here
-          UpdatedTransactionList(),
-        ],
+            //Add other widgets here
+            UpdatedTransactionList(),
+          ],
+        ),
       ),
     );
   }
