@@ -26,7 +26,7 @@ class TransactionList extends StatelessWidget {
                       border: Border.all(color: Colors.black, width: 5.0),
                     ),
                     child: Text(
-                      "\$ ${transactions[index].amount}",
+                      "\$ ${transactions[index].amount.toStringAsFixed(2)}",
                       style: const TextStyle(fontSize: 20.0),
                     ),
                   ),
