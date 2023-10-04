@@ -1,11 +1,15 @@
-import 'package:expenses_tracker/widgets/updated_transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-void main() => runApp(const App());
+import './models/transaction.dart';
+import './widgets/new_transaction.dart';
+import './widgets/transaction_list.dart';
 
+// Entry point
+void main() => runApp(App());
+
+// Main App
 class App extends StatelessWidget {
-  const App({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,13 +20,39 @@ class App extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  // const HomePage({super.key});
+// HomePage widget
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
 
-  final titleInputController = TextEditingController();
-  final amountInputController = TextEditingController();
+class _HomePageState extends State<HomePage> {
+  final List<Transaction> _transactions = [];
 
-  HomePage({super.key});
+  void _addTransaction(String title, double amount) {
+    final newTransaction = Transaction(
+      title: title,
+      amount: amount,
+      date: DateFormat('ddMMM hh:mm').format(
+        DateTime.now(),
+      ),
+    );
+
+    setState(
+      () {
+        _transactions.add(newTransaction);
+      },
+    );
+  }
+
+  void _addNewTransactionSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return NewTransactionInput(_addTransaction);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +60,10 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Hi there!! Welcome Back'),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            Card(
+            const Card(
               color: Colors.grey,
               elevation: 5.0,
               child: SizedBox(
@@ -44,14 +74,14 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            TransactionList(_transactions),
             //Add other widgets here
-            UpdatedTransactionList(),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => _addNewTransactionSheet(context),
         child: const Icon(Icons.add),
       ),
     );
