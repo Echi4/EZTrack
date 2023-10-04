@@ -24,6 +24,8 @@ class _NewTransactionInputState extends State<NewTransactionInput> {
     widget.addTransaction(enteredTitle, enteredAmount);
     titleController.clear();
     amountController.clear();
+
+    Navigator.of(context).pop();
   }
 
   @override
