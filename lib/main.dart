@@ -6,22 +6,49 @@ import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 
 // Entry point
-void main() => runApp(App());
+void main() => runApp(const App());
 
 // Main App
 class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blueGrey,
+        fontFamily: "Open Sans",
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(
+            fontFamily: "Quicksand",
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: "Quicksand",
+            fontSize: 20.0,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: "Quicksand",
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       title: "Expense Tracker App",
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
 
 // HomePage widget
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -58,7 +85,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hi there!! Welcome Back'),
+        title: const Text('Hi Edwin!'),
       ),
       body: SingleChildScrollView(
         child: Column(

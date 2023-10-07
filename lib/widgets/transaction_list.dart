@@ -27,7 +27,7 @@ class TransactionList extends StatelessWidget {
                     ),
                     child: Text(
                       "\$ ${transactions[index].amount.toStringAsFixed(2)}",
-                      style: const TextStyle(fontSize: 20.0),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                   Column(
@@ -35,8 +35,7 @@ class TransactionList extends StatelessWidget {
                     children: [
                       Text(
                         transactions[index].title,
-                        style: const TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Text(
                         transactions[index].date,
