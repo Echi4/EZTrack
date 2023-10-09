@@ -1,5 +1,5 @@
+import 'package:expenses_tracker/widgets/chart_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import './models/transaction.dart';
 import './widgets/new_transaction.dart';
@@ -60,9 +60,7 @@ class _HomePageState extends State<HomePage> {
     final newTransaction = Transaction(
       title: title,
       amount: amount,
-      date: DateFormat('ddMMM hh:mm').format(
-        DateTime.now(),
-      ),
+      date: DateTime.now(),
     );
 
     setState(
@@ -81,6 +79,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((transaction) {
+      return transaction.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,17 +98,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Card(
-              color: Colors.grey,
-              elevation: 5.0,
-              child: SizedBox(
-                width: double.infinity,
-                height: 50.0,
-                child: Text(
-                  'CHART',
-                ),
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_transactions),
             //Add other widgets here
           ],
