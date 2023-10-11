@@ -1,10 +1,9 @@
-import 'package:expenses_tracker/widgets/bar_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import './models/transaction.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
+import './widgets/bar_chart.dart';
 
 // Entry point
 void main() => runApp(const App());
@@ -80,7 +79,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<Transaction> get _getRecentTransaction {
+  List<Transaction> get _getRecentTransactions {
     return _transactions.where((transaction) {
       return transaction.date.isAfter(
         DateTime.now().subtract(
@@ -99,7 +98,8 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Chart(_getRecentTransaction),
+            Chart(_getRecentTransactions),
+
             TransactionList(_transactions),
             //Add other widgets here
           ],
