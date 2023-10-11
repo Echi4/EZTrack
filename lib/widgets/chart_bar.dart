@@ -1,36 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import '../models/transaction.dart';
 
-class Chart extends StatelessWidget {
-  final List<Transaction> recentTransactions;
+class ChartBar extends StatelessWidget {
+  final String dayLabel;
+  final double amountLabel;
+  final double dayPercentageOfTheWholeWeek;
 
-  const Chart(this.recentTransactions, {super.key});
-
-  List<Map<String, Object>> get getTransactionsDaily {
-    return List.generate(7, (index) {
-      var totalAmountPerDay = 0.0;
-      final weekDay = DateTime.now().subtract(Duration(days: index));
-      for (var i = 0; i < recentTransactions.length; i++) {
-        if (recentTransactions[i].date.day == weekDay.day &&
-            recentTransactions[i].date.month == weekDay.month &&
-            recentTransactions[i].date.year == weekDay.year) {
-          totalAmountPerDay += recentTransactions[i].amount;
-        }
-      }
-      return {
-        "Day": DateFormat.E().format(weekDay),
-        "Amount": totalAmountPerDay
-      };
-    });
-  }
+  const ChartBar(
+      this.amountLabel, this.dayLabel, this.dayPercentageOfTheWholeWeek,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
-      child: Row(
-        children: [Text("Show Chart Bars Here")],
-      ),
+    return Column(
+      children: [
+        Text("\$${amountLabel.toStringAsFixed(0)}"),
+        const SizedBox(
+          height: 5.0,
+        ),
+        SizedBox(
+          height: 80.0,
+          width: 10.0,
+          child: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(3.0),
+                ),
+              ),
+              FractionallySizedBox(
+                heightFactor: dayPercentageOfTheWholeWeek,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(3.0),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 5.0,
+        ),
+        Text(dayLabel),
+      ],
     );
   }
 }

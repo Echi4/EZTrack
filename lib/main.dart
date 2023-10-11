@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import './models/transaction.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
-import './widgets/bar_chart.dart';
+import './widgets/chart.dart';
 
 // Entry point
 void main() => runApp(const App());
