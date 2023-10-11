@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
 
@@ -55,7 +56,8 @@ class TransactionList extends StatelessWidget {
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             Text(
-                              transactions[index].date,
+                              DateFormat('E dd MMM hh:mm aa')
+                                  .format(transactions[index].date),
                               style: const TextStyle(
                                   fontSize: 20.0, color: Colors.grey),
                             )
