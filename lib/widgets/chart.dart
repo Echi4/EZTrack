@@ -1,23 +1,23 @@
-import 'package:expenses_tracker/widgets/chart_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
+import './chart_bar.dart';
 
 class Chart extends StatelessWidget {
-  final List<Transaction> recentTransaction;
+  final List<Transaction> recentTransactions;
 
-  const Chart(this.recentTransaction, {super.key});
+  const Chart(this.recentTransactions, {super.key});
 
-  List<Map<String, dynamic>> get getRecentTransactions {
+  List<Map<String, dynamic>> get getRecentTransactionsData {
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(Duration(days: index));
       var totalAmountPerDay = 0.0;
-      for (var i = 0; i < recentTransaction.length; i++) {
-        if (recentTransaction[i].date.day == weekDay.day &&
-            recentTransaction[i].date.month == weekDay.month &&
-            recentTransaction[i].date.year == weekDay.year) {
-          totalAmountPerDay += recentTransaction[i].amount;
+      for (var i = 0; i < recentTransactions.length; i++) {
+        if (recentTransactions[i].date.day == weekDay.day &&
+            recentTransactions[i].date.month == weekDay.month &&
+            recentTransactions[i].date.year == weekDay.year) {
+          totalAmountPerDay += recentTransactions[i].amount;
         }
       }
       return {
@@ -27,8 +27,8 @@ class Chart extends StatelessWidget {
     });
   }
 
-  double get totalWeeklySpending {
-    return getRecentTransactions.fold(0.0, (previousValue, element) {
+  double get getTotalWeeklySpending {
+    return getRecentTransactionsData.fold(0.0, (previousValue, element) {
       return previousValue + element["amount"];
     });
   }
@@ -39,13 +39,13 @@ class Chart extends StatelessWidget {
     return Card(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: getRecentTransactions.map((transactionData) {
+        children: getRecentTransactionsData.map((transactionData) {
           return ChartBar(
-              transactionData["amount"],
               transactionData["day"],
-              totalWeeklySpending == 0.0
+              transactionData["amount"],
+              getTotalWeeklySpending == 0.0
                   ? 0.0
-                  : transactionData["amount"] / totalWeeklySpending);
+                  : transactionData["amount"] / getTotalWeeklySpending);
         }).toList(),
       ),
     );
