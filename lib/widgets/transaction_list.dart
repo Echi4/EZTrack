@@ -11,7 +11,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350,
+      height: 450,
       child: transactions.isEmpty
           ? Padding(
               padding: const EdgeInsets.all(10.0),
@@ -71,17 +71,6 @@ class TransactionList extends StatelessWidget {
                         iconSize: 30.0,
                       ),
                     ),
-                    // child: Row(
-                    //   children: [
-
-                    //     Column(
-                    //       crossAxisAlignment: CrossAxisAlignment.start,
-                    //       children: [
-
-                    //       ],
-                    //     )
-                    //   ],
-                    // ),
                   );
                 },
               ),
