@@ -37,16 +37,23 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     // getRecentTransactions;
     return Card(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: getRecentTransactionsData.map((transactionData) {
-          return ChartBar(
-              transactionData["day"],
-              transactionData["amount"],
-              getTotalWeeklySpending == 0.0
-                  ? 0.0
-                  : transactionData["amount"] / getTotalWeeklySpending);
-        }).toList(),
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: getRecentTransactionsData.map((transactionData) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                  transactionData["day"],
+                  transactionData["amount"],
+                  getTotalWeeklySpending == 0.0
+                      ? 0.0
+                      : transactionData["amount"] / getTotalWeeklySpending),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

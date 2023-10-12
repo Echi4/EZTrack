@@ -38,41 +38,50 @@ class TransactionList extends StatelessWidget {
                 itemCount: transactions.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            padding: const EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black, width: 5.0),
-                            ),
-                            child: Text(
-                              "\$ ${transactions[index].amount.toStringAsFixed(2)}",
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                transactions[index].title,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              Text(
-                                DateFormat('E dd MMM hh:mm aa')
-                                    .format(transactions[index].date),
-                                style: const TextStyle(
-                                    fontSize: 20.0, color: Colors.grey),
-                              )
-                            ],
-                          )
-                        ],
+                    elevation: 5,
+                    margin: const EdgeInsets.all(10.0),
+                    child: ListTile(
+                      leading: Container(
+                        padding: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 3.0),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          "\$ ${transactions[index].amount.toStringAsFixed(2)}",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                      title: Text(
+                        transactions[index].title,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      subtitle: Text(
+                        DateFormat('E dd MMM hh:mm aa')
+                            .format(transactions[index].date),
+                        style:
+                            const TextStyle(fontSize: 20.0, color: Colors.grey),
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                        iconSize: 30.0,
                       ),
                     ),
+                    // child: Row(
+                    //   children: [
+
+                    //     Column(
+                    //       crossAxisAlignment: CrossAxisAlignment.start,
+                    //       children: [
+
+                    //       ],
+                    //     )
+                    //   ],
+                    // ),
                   );
                 },
               ),
