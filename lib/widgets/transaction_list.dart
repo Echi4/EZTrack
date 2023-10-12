@@ -57,7 +57,7 @@ class TransactionList extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       subtitle: Text(
-                        DateFormat('E dd MMM hh:mm aa')
+                        DateFormat('EddMMM hh:mm aa')
                             .format(transactions[index].date),
                         style:
                             const TextStyle(fontSize: 20.0, color: Colors.grey),
