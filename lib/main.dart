@@ -17,9 +17,14 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.blueGrey, errorColor: Colors.red),
         fontFamily: "Open Sans",
         textTheme: const TextTheme(
+          labelMedium: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: "Quicksand",
+              fontSize: 19.0),
           titleMedium: TextStyle(
             fontFamily: "Quicksand",
             fontSize: 18.0,
@@ -29,6 +34,11 @@ class App extends StatelessWidget {
             fontFamily: "Quicksand",
             fontSize: 20.0,
             fontStyle: FontStyle.italic,
+          ),
+        ),
+        dialogTheme: DialogTheme(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
           ),
         ),
         appBarTheme: const AppBarTheme(
@@ -56,11 +66,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [];
 
-  void _addTransaction(String title, double amount) {
+  void _addTransaction(String title, double amount, DateTime date) {
     final newTransaction = Transaction(
       title: title,
       amount: amount,
-      date: DateTime.now(),
+      date: date,
     );
 
     setState(
@@ -77,6 +87,13 @@ class _HomePageState extends State<HomePage> {
         return NewTransactionInput(_addTransaction);
       },
     );
+  }
+
+  void _deleteTransaction(String transactionId) {
+    setState(() {
+      _transactions
+          .removeWhere((transaction) => transaction.id == transactionId);
+    });
   }
 
   List<Transaction> get _getRecentTransactions {
@@ -100,7 +117,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Chart(_getRecentTransactions),
 
-            TransactionList(_transactions),
+            TransactionList(_transactions, _deleteTransaction),
             //Add other widgets here
           ],
         ),
