@@ -74,7 +74,7 @@ class _NewTransactionInputState extends State<NewTransactionInput> {
                 child: Text(
                   _pickedDate == null
                       ? "Date not chosen!"
-                      : DateFormat('EddMMM hh:mm aa').format(_pickedDate!),
+                      : DateFormat('E dd MMM hh:mm aa').format(_pickedDate!),
                 ),
               ),
               TextButton(
